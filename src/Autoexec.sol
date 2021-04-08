@@ -31,9 +31,9 @@ interface IlkReg {
 
 contract Autoexec {
 
-    Chainlog constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
-    IlkReg   immutable ir;
-    AutoLine immutable al;
+    Chainlog private constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
+    IlkReg   private immutable ir;
+    AutoLine private immutable al;
 
     constructor() public {
         ir = IlkReg(cl.getAddress("ILK_REGISTRY"));
@@ -45,5 +45,13 @@ contract Autoexec {
         for (uint256 i = 0; i < _ilks.length; i++) {
             al.exec(_ilks[i]);
         }
+    }
+
+    function registry() external view returns (address) {
+        return address(ir);
+    }
+
+    function autoline() external view returns (address) {
+        return address(al);
     }
 }

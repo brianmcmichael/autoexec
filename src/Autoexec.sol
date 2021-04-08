@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: AGPL-3.0-or-later
 /// Autoexec.sol -- Adjust the DC IAM for all MCD collateral types
 
 // Copyright (C) 2020  Brian McMichael
@@ -15,7 +15,7 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-pragma solidity ^0.6.11;
+pragma solidity ^0.6.12;
 
 interface Chainlog {
     function getAddress(bytes32) external returns (address);

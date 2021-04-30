@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: AGPL-3.0-or-later
 /// Autoexec.sol -- Adjust the DC IAM for all MCD collateral types
 
 // Copyright (C) 2020  Brian McMichael
@@ -15,7 +15,7 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-pragma solidity ^0.6.11;
+pragma solidity ^0.6.12;
 
 interface Chainlog {
     function getAddress(bytes32) external returns (address);
@@ -31,9 +31,9 @@ interface IlkReg {
 
 contract Autoexec {
 
-    Chainlog constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
-    IlkReg   immutable ir;
-    AutoLine immutable al;
+    Chainlog private constant  cl = Chainlog(0xdA0Ab1e0017DEbCd72Be8599041a2aa3bA7e740F);
+    IlkReg   private immutable ir;
+    AutoLine private immutable al;
 
     constructor() public {
         ir = IlkReg(cl.getAddress("ILK_REGISTRY"));
@@ -45,5 +45,13 @@ contract Autoexec {
         for (uint256 i = 0; i < _ilks.length; i++) {
             al.exec(_ilks[i]);
         }
+    }
+
+    function registry() external view returns (address) {
+        return address(ir);
+    }
+
+    function autoline() external view returns (address) {
+        return address(al);
     }
 }
